@@ -1,0 +1,48 @@
+# Web 框架
+fastapi
+uvicorn[standard]
+
+# 数据库
+sqlalchemy
+aiomysql
+pymysql
+
+# 数据校验与配置
+pydantic
+pydantic-settings
+
+# 安全：JWT 令牌 + 密码哈希
+pyjwt
+bcrypt
+
+# 读取 .env 文件
+python-dotenv
+
+# ==================== 智能客服 RAG ====================
+
+# 文件上传（FastAPI 的 File / Form 依赖它，缺了上传接口会直接报错）
+python-multipart
+
+# ---- LangChain 生态组件（只列真正用到的，避免堆无关依赖）----
+# 核心抽象：Document、Embeddings 接口、消息类型
+langchain-core
+# 文本切分：RecursiveCharacterTextSplitter，中文分隔符就配在它上面
+langchain-text-splitters
+# 大模型接入：ChatOpenAI。DeepSeek 提供 OpenAI 兼容接口，所以不需要专用 SDK
+langchain-openai
+# 向量库集成：Chroma 的 LangChain 封装
+langchain-chroma
+
+# ---- 向量存储与向量模型 ----
+# Chroma：本地文件持久化，不用额外起服务
+chromadb
+# BGE 向量模型 / 重排模型的运行框架（会带入 torch，约 200MB，首次安装较慢）
+sentence-transformers
+
+# ---- 文档解析 ----
+pypdf           # PDF 文字提取
+python-docx     # Word 解析
+
+# 说明：langchain-community、langchain-huggingface 等元包未列入，
+# 因为本项目通过自定义 BGEEmbeddings 直接对接 sentence-transformers，
+# 没有用到它们。少一个依赖就少一份升级和漏洞维护成本。
